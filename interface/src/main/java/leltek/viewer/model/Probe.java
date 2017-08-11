@@ -353,14 +353,14 @@ public interface Probe {
      * 由ScanListener.onModeSwitched(EnumMode mode), 且mode等於MODE_B表示切換成功
      * 由ScanListener.onModeSwitchingError()表示切換失敗
      */
-    void swithToBMode();
+    void switchToBMode();
 
     /**
      * 試圖將scan mode切換為C mode
      * 由ScanListener.onModeSwitched(String mode), 且mode等於MODE_C表示切換成功
      * 由ScanListener.onModeSwitchingError()表示切換失敗
      */
-    void swithToCMode();
+    void switchToCMode();
 
     /**
      * 回傳目前的scan mode

@@ -1,1 +1,1 @@
-include ':interface', ':simu-app'
+include ':interface', ':base-lib', ':simu-lib', ':simu-app'

@@ -19,11 +19,7 @@ public class MainActivity extends AppCompatActivity
         implements Probe.SystemListener, Probe.BatteryListener, Probe.TemperatureListener {
     final static Logger logger = LoggerFactory.getLogger(MainActivity.class);
 
-    private Button mConnectButton;
-    private Button mBModeButton;
     private Probe probe;
-    private static String cfgRoot = "cfg";
-    private static String cineFileName = cfgRoot + "/cine.raw";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +29,13 @@ public class MainActivity extends AppCompatActivity
 
         ToastMgr.init(getApplicationContext());
 
-        probe = SimuProbe.init(cfgRoot, cineFileName, getAssets());
+        String cfgRoot = "cfg";
+        probe = SimuProbe.init(cfgRoot, getAssets());
         probe.setSystemListener(this);
         probe.setBatteryListener(this);
         probe.setTemperatureListener(this);
 
-        mConnectButton = (Button) findViewById(R.id.connect_button);
+        Button mConnectButton = findViewById(R.id.connect_button);
         mConnectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,14 +44,20 @@ public class MainActivity extends AppCompatActivity
                     return;
                 }
 
-                probe.initialize();
+                if (!probe.isRequesting()) {
+                    ToastMgr.show("connecting to probe");
+                    probe.initialize();
+                }
             }
         });
-        mBModeButton = (Button) findViewById(R.id.scan_button);
-        mBModeButton.setOnClickListener(new View.OnClickListener() {
+        Button mScanButton = findViewById(R.id.scan_button);
+        mScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!probe.isConnected()) {
+                if (probe.isRequesting()) {
+                    ToastMgr.show("Processing previous request.");
+                    return;
+                } else if (!probe.isConnected()) {
                     ToastMgr.show("Not Connected");
                     return;
                 }
@@ -64,6 +67,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        if (probe.isRequesting()) {
+            ToastMgr.show("Processing previous request.");
+        } else if (!probe.isConnected()) {
+            ToastMgr.show("connecting to probe");
+            probe.initialize();
+        }
     }
 
     @Override

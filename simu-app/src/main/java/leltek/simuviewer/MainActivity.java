@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity
         probe.setBatteryListener(this);
         probe.setTemperatureListener(this);
 
-        Button mConnectButton = findViewById(R.id.connect_button);
-        mConnectButton.setOnClickListener(new View.OnClickListener() {
+        Button connectButton = findViewById(R.id.connect_button);
+        connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (probe.isConnected()) {
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-        Button mScanButton = findViewById(R.id.scan_button);
-        mScanButton.setOnClickListener(new View.OnClickListener() {
+        Button scanButton = findViewById(R.id.scan_button);
+        scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (probe.isRequesting()) {

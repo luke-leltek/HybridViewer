@@ -30,7 +30,7 @@ dependencies {
     compile project(':base-lib')
     compile project(':simu-lib')
     compile 'org.slf4j:slf4j-api:1.7.25'
-    compile 'io.netty:netty-all:4.1.14.Final'
+    compile 'io.netty:netty-all:4.1.13.Final'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.amitshekhar.android:glide-bitmap-pool:0.0.1'

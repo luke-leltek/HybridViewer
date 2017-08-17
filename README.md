@@ -17,3 +17,4 @@
 * ScanActivity 的影像可以簡單的 drag & move 及 zoom in & out。
 * 可以按 Test 開頭的 button 來模擬 device 遇到的狀況。
 * Test Conn Error 是用來模擬 device 斷線的狀況，畫面會回到 MainActivity，可以按 Connect 來重新連線。
+"# HybridViewer" 

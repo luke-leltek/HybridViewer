@@ -127,7 +127,7 @@ public class UsImageView extends AppCompatImageView {
         paint.setStrokeWidth(5);
 
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.gray_circle);
+                R.drawable.rec15x8);
         ball0 = new Ball(bitmap, new PointF(), 0);
         ball1 = new Ball(bitmap, new PointF(), 1);
         ball2 = new Ball(bitmap, new PointF(), 2);

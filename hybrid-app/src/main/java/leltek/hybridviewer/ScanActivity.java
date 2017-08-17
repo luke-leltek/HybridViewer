@@ -28,13 +28,15 @@ public class ScanActivity extends AppCompatActivity
         Probe.BatteryListener, Probe.TemperatureListener {
     final static Logger logger = LoggerFactory.getLogger(ScanActivity.class);
 
+    private boolean mode_sim = false;
+    private boolean mode_test = false;
     private Probe probe;
     private Button mToggleScan;
     private Button mBMode;
     private Button mCMode;
     private Button mFit;
     private UsImageView mImageView;
-    private TextView mCineBufferCount;
+//    private TextView mCineBufferCount;
     private Button mTestConnectionError;
     private Button mTestOverHeated;
     private Button mTestBatteryLow;
@@ -96,6 +98,8 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
+/***
+    if(mode_test==true) {
         mFit = findViewById(R.id.fit);
         mFit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,11 +107,14 @@ public class ScanActivity extends AppCompatActivity
                 switchFit();
             }
         });
+    }  // if(mode_test==true) {
+****/
 
         mImageView = findViewById(R.id.image_view);
 
-        mCineBufferCount = findViewById(R.id.cine_buffer_count);
+//        mCineBufferCount = findViewById(R.id.cine_buffer_count);
 
+/**********
         mTestConnectionError = findViewById(R.id.test_conn_error);
         mTestConnectionError.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,8 +138,10 @@ public class ScanActivity extends AppCompatActivity
 		}
             }
         });
+*************/
 
 
+/**********
         mTestBatteryLow = findViewById(R.id.test_battery_low);
         mTestBatteryLow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +153,7 @@ public class ScanActivity extends AppCompatActivity
 		}
             }
         });
+*********/
 
         mSeekBarGain = findViewById(R.id.seekBarGain);
         mSeekBarGain.setProgress(probe.getGain());
@@ -165,6 +175,7 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
+/***
         mSeekBarDr = findViewById(R.id.seekBarDr);
         mSeekBarDr.setProgress(probe.getDr());
         mSeekBarDr.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -277,9 +288,12 @@ public class ScanActivity extends AppCompatActivity
                 mSeekBarTgc4.setProgress(probe.getTgc4());
             }
         });
+**********/
 
         mSeekBarPersistence = findViewById(R.id.seekBarPersistence);
-        mSeekBarPersistence.setProgress(probe.getPersistence());
+        //mSeekBarPersistence.setProgress(probe.getPersistence());
+        //mSeekBarPersistence.setProgress(2);
+                probe.setPersistence(2);
         mSeekBarPersistence.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -299,7 +313,8 @@ public class ScanActivity extends AppCompatActivity
         });
 
         mSeekBarEnhancement = findViewById(R.id.seekBarEnhancement);
-        mSeekBarEnhancement.setProgress(probe.getEnhanceLevel());
+        //mSeekBarEnhancement.setProgress(probe.getEnhanceLevel());
+                probe.setEnhanceLevel(2);
         mSeekBarEnhancement.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -318,6 +333,7 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
+/********
         mNumberPicker = findViewById(R.id.np);
         mNumberPicker.setMinValue(0);
         mNumberPicker.setMaxValue(probe.getGrayMapMaxValue());
@@ -329,6 +345,7 @@ public class ScanActivity extends AppCompatActivity
                 probe.setGrayMap(newVal);
             }
         });
+*********/
 
         mSpinnerColorPrf = findViewById(R.id.spinnerColorPrf);
         mSpinnerColorPrf.setAdapter(new ArrayAdapter<>(this,
@@ -546,12 +563,12 @@ public class ScanActivity extends AppCompatActivity
 
     @Override
     public void onCineBufferCountIncreased(int newCineBufferCount) {
-        mCineBufferCount.setText(String.valueOf(newCineBufferCount));
+//        mCineBufferCount.setText(String.valueOf(newCineBufferCount));
     }
 
     @Override
     public void onCineBufferCleared() {
-        mCineBufferCount.setText(String.valueOf(0));
+//        mCineBufferCount.setText(String.valueOf(0));
     }
 
     @Override

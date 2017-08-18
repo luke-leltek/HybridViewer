@@ -124,6 +124,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"/>
 
+                <TextView
+		    android:id="@+id/txvAdv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+		    android:text="Advanced setting" 
+		/>
+
+               <TextView
+                    android:id="@+id/txvGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gray Map" />
+
+                <NumberPicker
+                    android:id="@+id/np"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"/>
+
+
 
 
 

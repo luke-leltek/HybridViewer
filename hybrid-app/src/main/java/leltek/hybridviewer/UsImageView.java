@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import leltek.viewer.model.Probe;
 import leltek.viewer.model.WifiProbe;
 import leltek.viewer.model.SimuProbe;
+import leltek.viewer.model.SimuProbeLinear;
 import leltek.viewer.util.ImageUtils;
 
 /**
@@ -111,7 +112,7 @@ public class UsImageView extends AppCompatImageView {
     }
 
     private void init(Context context) {
-        probe = ProbeSelection.simu ? SimuProbe.getDefault() : WifiProbe.getDefault();
+        probe = ProbeSelection.simu ? (ProbeSelection.simuLinear ? SimuProbeLinear.getDefault() : SimuProbe.getDefault()) : WifiProbe.getDefault();
         int heightPx = probe.getImageHeightPx();
         int widthPx = probe.getImageWidthPx();
         int pixCount = heightPx * widthPx;

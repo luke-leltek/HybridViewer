@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import leltek.viewer.model.Probe;
 import leltek.viewer.model.WifiProbe;
 import leltek.viewer.model.SimuProbe;
+import leltek.viewer.model.SimuProbeLinear;
 
 public class ScanActivity extends AppCompatActivity
         implements Probe.ScanListener, Probe.CineBufferListener,
@@ -74,7 +75,7 @@ public class ScanActivity extends AppCompatActivity
         logger.debug("onCreate() called");
         setContentView(R.layout.activity_scan);
 
-        probe = ProbeSelection.simu ? SimuProbe.getDefault() : WifiProbe.getDefault();
+        probe = ProbeSelection.simu ? (ProbeSelection.simuLinear ? SimuProbeLinear.getDefault() : SimuProbe.getDefault()) : WifiProbe.getDefault();
         probe.setScanListener(this);
         probe.setCineBufferListener(this);
         probe.setBatteryListener(this);
@@ -478,7 +479,11 @@ public class ScanActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 		if(ProbeSelection.simu) {
-		    ((SimuProbe) probe).testConnectionClosed();
+		    if(ProbeSelection.simuLinear) {
+			((SimuProbeLinear) probe).testConnectionClosed();
+		    } else {
+			((SimuProbe) probe).testConnectionClosed();
+		    }
 		} else {
 		    ((WifiProbe) probe).testConnectionClosed();
 		}
@@ -490,7 +495,11 @@ public class ScanActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 		if(ProbeSelection.simu) {
-		    ((SimuProbe) probe).testOverHeated();
+		    if(ProbeSelection.simuLinear) {
+			((SimuProbeLinear) probe).testOverHeated();
+		    } else {
+			((SimuProbe) probe).testOverHeated();
+		    }
 		} else {
 		    ((WifiProbe) probe).testOverHeated();
 		}
@@ -503,7 +512,11 @@ public class ScanActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 		if(ProbeSelection.simu) {
-		    ((SimuProbe) probe).testBatteryLevelTooLow();
+		    if(ProbeSelection.simuLinear) {
+			((SimuProbeLinear) probe).testBatteryLevelTooLow();
+		    } else {
+			((SimuProbe) probe).testBatteryLevelTooLow();
+		    }
 		} else {
 		    ((WifiProbe) probe).testBatteryLevelTooLow();
 		}

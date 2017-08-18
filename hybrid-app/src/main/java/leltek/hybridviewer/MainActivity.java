@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import leltek.viewer.model.Probe;
 import leltek.viewer.model.WifiProbe;
 import leltek.viewer.model.SimuProbe;
+import leltek.viewer.model.SimuProbeLinear;
 
 public class MainActivity extends AppCompatActivity
         implements Probe.SystemListener, Probe.BatteryListener, Probe.TemperatureListener {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         ToastMgr.init(getApplicationContext());
 
         String cfgRoot = "cfg";
-        probe = ProbeSelection.simu ? SimuProbe.init(cfgRoot, getAssets()) : WifiProbe.init(cfgRoot, getAssets());
+        probe = ProbeSelection.simu ? (ProbeSelection.simuLinear ? SimuProbeLinear.init(cfgRoot, getAssets()) : SimuProbe.init(cfgRoot, getAssets())) : WifiProbe.init(cfgRoot, getAssets());
         probe.setSystemListener(this);
         probe.setBatteryListener(this);
         probe.setTemperatureListener(this);

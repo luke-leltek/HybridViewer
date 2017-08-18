@@ -6,4 +6,5 @@ package leltek.hybridviewer;
 
 public final class ProbeSelection {
     final static boolean simu = true;
+    final static boolean simuLinear = false;
 }

@@ -54,6 +54,10 @@ public class ScanActivity extends AppCompatActivity
     private SeekBar mSeekBarColorSensitivity;
     private Spinner mSpinnerColorAngle;
 
+    private TextView txvAdv;
+    private TextView txvGray;
+    private boolean mode_adv= false;
+
     public static Intent newIntent(Context packageContext) {
         return new Intent(packageContext, ScanActivity.class);
     }
@@ -333,19 +337,7 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
-/********
-        mNumberPicker = findViewById(R.id.np);
-        mNumberPicker.setMinValue(0);
-        mNumberPicker.setMaxValue(probe.getGrayMapMaxValue());
-        mNumberPicker.setWrapSelectorWheel(false);
-        mNumberPicker.setValue(probe.getGrayMap());
-        mNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                probe.setGrayMap(newVal);
-            }
-        });
-*********/
+
 
         mSpinnerColorPrf = findViewById(R.id.spinnerColorPrf);
         mSpinnerColorPrf.setAdapter(new ArrayAdapter<>(this,
@@ -411,6 +403,49 @@ public class ScanActivity extends AppCompatActivity
 
             }
         });
+	
+        txvAdv = findViewById(R.id.txvAdv);
+	txvAdv.setVisibility(View.VISIBLE);
+        txvAdv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+		    if(mode_adv== true ){
+		    	mode_adv = false;
+		    	//txvAdv.setVisibility(View.VISIBLE);
+		    	mNumberPicker.setVisibility(View.VISIBLE);
+		    	txvGray.setVisibility(View.VISIBLE);
+		    } else {
+		    	mode_adv = true;
+		    	//txvAdv.setVisibility(View.VISIBLE);
+		    	mNumberPicker.setVisibility(View.GONE);
+		    	txvGray.setVisibility(View.GONE);
+		    }
+            }
+        });
+
+        txvGray = findViewById(R.id.txvGray);
+	txvGray.setVisibility(View.GONE);
+        txvGray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        mNumberPicker = findViewById(R.id.np);
+	mNumberPicker.setVisibility(View.GONE);
+        mNumberPicker.setMinValue(0);
+        mNumberPicker.setMaxValue(probe.getGrayMapMaxValue());
+        mNumberPicker.setWrapSelectorWheel(false);
+        mNumberPicker.setValue(probe.getGrayMap());
+        mNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                probe.setGrayMap(newVal);
+            }
+        });
+
+
     }
 
     private void switchFit() {

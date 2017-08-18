@@ -36,7 +36,7 @@ public class ScanActivity extends AppCompatActivity
     private Button mCMode;
     private Button mFit;
     private UsImageView mImageView;
-//    private TextView mCineBufferCount;
+    private TextView mCineBufferCount;
     private Button mTestConnectionError;
     private Button mTestOverHeated;
     private Button mTestBatteryLow;
@@ -55,7 +55,13 @@ public class ScanActivity extends AppCompatActivity
     private Spinner mSpinnerColorAngle;
 
     private TextView txvAdv;
+    private TextView txvCinebufcnt;
     private TextView txvGray;
+    private TextView txvDr;
+    private TextView txvTgc1;
+    private TextView txvTgc2;
+    private TextView txvTgc3;
+    private TextView txvTgc4;
     private boolean mode_adv= false;
 
     public static Intent newIntent(Context packageContext) {
@@ -73,6 +79,9 @@ public class ScanActivity extends AppCompatActivity
         probe.setCineBufferListener(this);
         probe.setBatteryListener(this);
         probe.setTemperatureListener(this);
+
+	// main image for bmode/color 
+        mImageView = findViewById(R.id.image_view);
 
         mToggleScan = findViewById(R.id.toogle_scan);
         mToggleScan.setOnClickListener(new View.OnClickListener() {
@@ -102,62 +111,6 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
-/***
-    if(mode_test==true) {
-        mFit = findViewById(R.id.fit);
-        mFit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchFit();
-            }
-        });
-    }  // if(mode_test==true) {
-****/
-
-        mImageView = findViewById(R.id.image_view);
-
-//        mCineBufferCount = findViewById(R.id.cine_buffer_count);
-
-/**********
-        mTestConnectionError = findViewById(R.id.test_conn_error);
-        mTestConnectionError.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-		if(ProbeSelection.simu) {
-		    ((SimuProbe) probe).testConnectionClosed();
-		} else {
-		    ((WifiProbe) probe).testConnectionClosed();
-		}
-            }
-        });
-
-        mTestOverHeated = findViewById(R.id.test_over_heated);
-        mTestOverHeated.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-		if(ProbeSelection.simu) {
-		    ((SimuProbe) probe).testOverHeated();
-		} else {
-		    ((WifiProbe) probe).testOverHeated();
-		}
-            }
-        });
-*************/
-
-
-/**********
-        mTestBatteryLow = findViewById(R.id.test_battery_low);
-        mTestBatteryLow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-		if(ProbeSelection.simu) {
-		    ((SimuProbe) probe).testBatteryLevelTooLow();
-		} else {
-		    ((WifiProbe) probe).testBatteryLevelTooLow();
-		}
-            }
-        });
-*********/
 
         mSeekBarGain = findViewById(R.id.seekBarGain);
         mSeekBarGain.setProgress(probe.getGain());
@@ -179,120 +132,6 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
-/***
-        mSeekBarDr = findViewById(R.id.seekBarDr);
-        mSeekBarDr.setProgress(probe.getDr());
-        mSeekBarDr.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                probe.setDr(progress);
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-
-        mSeekBarTgc1 = findViewById(R.id.seekBarTgc1);
-        mSeekBarTgc1.setProgress(probe.getTgc1());
-        mSeekBarTgc1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                probe.setTgc1(progress);
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        mSeekBarTgc2 = findViewById(R.id.seekBarTgc2);
-        mSeekBarTgc2.setProgress(probe.getTgc2());
-        mSeekBarTgc2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                probe.setTgc2(progress);
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        mSeekBarTgc3 = findViewById(R.id.seekBarTgc3);
-        mSeekBarTgc3.setProgress(probe.getTgc3());
-        mSeekBarTgc3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                probe.setTgc3(progress);
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        mSeekBarTgc4 = findViewById(R.id.seekBarTgc4);
-        mSeekBarTgc4.setProgress(probe.getTgc4());
-        mSeekBarTgc4.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                probe.setTgc4(progress);
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        mResetAllTgc = findViewById(R.id.resetAllTgc);
-        mResetAllTgc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                probe.resetAllTgc();
-                mSeekBarTgc1.setProgress(probe.getTgc1());
-                mSeekBarTgc2.setProgress(probe.getTgc2());
-                mSeekBarTgc3.setProgress(probe.getTgc3());
-                mSeekBarTgc4.setProgress(probe.getTgc4());
-            }
-        });
-**********/
 
         mSeekBarPersistence = findViewById(R.id.seekBarPersistence);
         //mSeekBarPersistence.setProgress(probe.getPersistence());
@@ -404,25 +243,98 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 	
+	////////////////////////////////////////////////////////////////////////
+	// txvAdv : 
+	// . when click, the following setting could be visible for internal test only
+	// . toggle between GONE and visible for these setting for clean screen
+	// . let txvAdv GONE for customer release
+	// . default GONE for the advanced setting
+	////////////////////////////////////////////////////////////////////////
         txvAdv = findViewById(R.id.txvAdv);
 	txvAdv.setVisibility(View.VISIBLE);
         txvAdv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-		    if(mode_adv== true ){
+		    if(mode_adv ){
 		    	mode_adv = false;
 		    	//txvAdv.setVisibility(View.VISIBLE);
+			txvCinebufcnt.setVisibility(View.VISIBLE);
+			mCineBufferCount.setVisibility(View.VISIBLE);
 		    	mNumberPicker.setVisibility(View.VISIBLE);
 		    	txvGray.setVisibility(View.VISIBLE);
+		    	txvDr.setVisibility(View.VISIBLE);
+			mSeekBarDr.setVisibility(View.VISIBLE);
+		    	txvTgc1.setVisibility(View.VISIBLE);
+		    	txvTgc2.setVisibility(View.VISIBLE);
+		    	txvTgc3.setVisibility(View.VISIBLE);
+		    	txvTgc4.setVisibility(View.VISIBLE);
+			mSeekBarTgc1.setVisibility(View.VISIBLE);
+			mSeekBarTgc2.setVisibility(View.VISIBLE);
+			mSeekBarTgc3.setVisibility(View.VISIBLE);
+			mSeekBarTgc4.setVisibility(View.VISIBLE);
+			mFit.setVisibility(View.VISIBLE);
+			mResetAllTgc.setVisibility(View.VISIBLE);
+			mTestConnectionError.setVisibility(View.VISIBLE);
+			mTestOverHeated.setVisibility(View.VISIBLE);
+			mTestBatteryLow.setVisibility(View.VISIBLE);
 		    } else {
 		    	mode_adv = true;
 		    	//txvAdv.setVisibility(View.VISIBLE);
+			txvCinebufcnt.setVisibility(View.GONE);
+			mCineBufferCount.setVisibility(View.GONE);
 		    	mNumberPicker.setVisibility(View.GONE);
 		    	txvGray.setVisibility(View.GONE);
+		    	txvDr.setVisibility(View.GONE);
+			mSeekBarDr.setVisibility(View.GONE);
+		    	txvTgc1.setVisibility(View.GONE);
+		    	txvTgc2.setVisibility(View.GONE);
+		    	txvTgc3.setVisibility(View.GONE);
+		    	txvTgc4.setVisibility(View.GONE);
+			mSeekBarTgc1.setVisibility(View.GONE);
+			mSeekBarTgc2.setVisibility(View.GONE);
+			mSeekBarTgc3.setVisibility(View.GONE);
+			mSeekBarTgc4.setVisibility(View.GONE);
+			mFit.setVisibility(View.GONE);
+			mResetAllTgc.setVisibility(View.GONE);
+			mTestConnectionError.setVisibility(View.GONE);
+			mTestOverHeated.setVisibility(View.GONE);
+			mTestBatteryLow.setVisibility(View.GONE);
 		    }
             }
         });
 
+	// CineBufferCount display 
+        txvCinebufcnt = findViewById(R.id.txvCinebufcnt);
+	txvCinebufcnt.setVisibility(View.GONE);
+        mCineBufferCount = findViewById(R.id.cine_buffer_count);
+	mCineBufferCount.setVisibility(View.GONE);
+
+	// dynamice range
+        txvDr = findViewById(R.id.txvDr);
+	txvDr.setVisibility(View.GONE);
+        mSeekBarDr = findViewById(R.id.seekBarDr);
+	mSeekBarDr.setVisibility(View.GONE);
+        mSeekBarDr.setProgress(probe.getDr());
+        mSeekBarDr.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                probe.setDr(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+	// gray map
         txvGray = findViewById(R.id.txvGray);
 	txvGray.setVisibility(View.GONE);
         txvGray.setOnClickListener(new View.OnClickListener() {
@@ -445,6 +357,173 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
+	///////////////
+	// digital tgc
+	///////////////
+        txvTgc1 = findViewById(R.id.txvTgc1);
+        txvTgc2 = findViewById(R.id.txvTgc2);
+        txvTgc3 = findViewById(R.id.txvTgc3);
+        txvTgc4 = findViewById(R.id.txvTgc4);
+
+        mSeekBarTgc1 = findViewById(R.id.seekBarTgc1);
+        mSeekBarTgc1.setProgress(probe.getTgc1());
+        mSeekBarTgc1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                probe.setTgc1(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        mSeekBarTgc2 = findViewById(R.id.seekBarTgc2);
+        mSeekBarTgc2.setProgress(probe.getTgc2());
+        mSeekBarTgc2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                probe.setTgc2(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        mSeekBarTgc3 = findViewById(R.id.seekBarTgc3);
+        mSeekBarTgc3.setProgress(probe.getTgc3());
+        mSeekBarTgc3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                probe.setTgc3(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        mSeekBarTgc4 = findViewById(R.id.seekBarTgc4);
+        mSeekBarTgc4.setProgress(probe.getTgc4());
+        mSeekBarTgc4.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                probe.setTgc4(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        mResetAllTgc = findViewById(R.id.resetAllTgc);
+        mResetAllTgc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                probe.resetAllTgc();
+                mSeekBarTgc1.setProgress(probe.getTgc1());
+                mSeekBarTgc2.setProgress(probe.getTgc2());
+                mSeekBarTgc3.setProgress(probe.getTgc3());
+                mSeekBarTgc4.setProgress(probe.getTgc4());
+            }
+        });
+
+	// fit for width or height
+//    if(mode_test==true) {
+        mFit = findViewById(R.id.fit);
+        mFit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchFit();
+            }
+        });
+//    }  // if(mode_test==true) {
+
+
+
+	///////////////
+	// test mode
+	///////////////
+        mTestConnectionError = findViewById(R.id.test_conn_error);
+        mTestConnectionError.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+		if(ProbeSelection.simu) {
+		    ((SimuProbe) probe).testConnectionClosed();
+		} else {
+		    ((WifiProbe) probe).testConnectionClosed();
+		}
+            }
+        });
+
+        mTestOverHeated = findViewById(R.id.test_over_heated);
+        mTestOverHeated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+		if(ProbeSelection.simu) {
+		    ((SimuProbe) probe).testOverHeated();
+		} else {
+		    ((WifiProbe) probe).testOverHeated();
+		}
+            }
+        });
+
+
+        mTestBatteryLow = findViewById(R.id.test_battery_low);
+        mTestBatteryLow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+		if(ProbeSelection.simu) {
+		    ((SimuProbe) probe).testBatteryLevelTooLow();
+		} else {
+		    ((WifiProbe) probe).testBatteryLevelTooLow();
+		}
+            }
+        });
+
+	// initial gone
+	txvTgc1.setVisibility(View.GONE);
+	txvTgc2.setVisibility(View.GONE);
+	txvTgc3.setVisibility(View.GONE);
+	txvTgc4.setVisibility(View.GONE);
+	mSeekBarTgc1.setVisibility(View.GONE);
+	mSeekBarTgc2.setVisibility(View.GONE);
+	mSeekBarTgc3.setVisibility(View.GONE);
+	mSeekBarTgc4.setVisibility(View.GONE);
+	mFit.setVisibility(View.GONE);
+	mResetAllTgc.setVisibility(View.GONE);
+	mTestConnectionError.setVisibility(View.GONE);
+	mTestOverHeated.setVisibility(View.GONE);
+	mTestBatteryLow.setVisibility(View.GONE);
 
     }
 
@@ -598,12 +677,12 @@ public class ScanActivity extends AppCompatActivity
 
     @Override
     public void onCineBufferCountIncreased(int newCineBufferCount) {
-//        mCineBufferCount.setText(String.valueOf(newCineBufferCount));
+        mCineBufferCount.setText(String.valueOf(newCineBufferCount));
     }
 
     @Override
     public void onCineBufferCleared() {
-//        mCineBufferCount.setText(String.valueOf(0));
+        mCineBufferCount.setText(String.valueOf(0));
     }
 
     @Override

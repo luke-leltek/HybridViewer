@@ -564,12 +564,7 @@ public class ScanActivity extends AppCompatActivity
         }
     }
 
-    private void gotoFullScreen(){
 
-        //Intent intent = new Intent(this, PatientActivity.class);
-        //startActivity(intent);
-        startActivity(new Intent(this, FullScreenActivity.class));
-    }
 
     @Override
     protected void onStart() {

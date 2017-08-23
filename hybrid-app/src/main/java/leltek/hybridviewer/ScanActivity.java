@@ -91,17 +91,9 @@ public class ScanActivity extends AppCompatActivity
         mImageView = findViewById(R.id.image_view);
 
 	////////////////////////////////////////////////////////////////////////
-	// information area on the right
+	// information and full screen button area on the right
 	////////////////////////////////////////////////////////////////////////
         imgFull = findViewById(R.id.imgFull);
-	imgFull.setVisibility(View.VISIBLE);
-        imgFull.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-	//	startActivity(new Intent(this, FullScreenActivity.class));
-                gotoFullScreen();
-            }
-        });
 
 
 	////////////////////////////////////////////////////////////////////////

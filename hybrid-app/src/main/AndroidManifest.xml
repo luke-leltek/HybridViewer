@@ -23,9 +23,7 @@
             android:name="leltek.hybridviewer.ScanActivity"
             android:screenOrientation="landscape"
             android:parentActivityName="leltek.hybridviewer.MainActivity"></activity>
-        <activity
-            android:screenOrientation="landscape"
-            android:name="leltek.hybridviewer.FullScreenActivity"></activity>
+
     </application>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>

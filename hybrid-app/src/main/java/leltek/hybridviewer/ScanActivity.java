@@ -13,6 +13,7 @@ import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.corelibs.utils.ToastMgr;
 
@@ -63,6 +64,9 @@ public class ScanActivity extends AppCompatActivity
     private TextView txvTgc2;
     private TextView txvTgc3;
     private TextView txvTgc4;
+
+    private ImageView imgFull;
+
     private boolean mode_adv= false;
 
     public static Intent newIntent(Context packageContext) {
@@ -81,9 +85,28 @@ public class ScanActivity extends AppCompatActivity
         probe.setBatteryListener(this);
         probe.setTemperatureListener(this);
 
-	// main image for bmode/color 
+	////////////////////////////////////////////////////////////////////////
+	// main image area for bmode/color in the center
+	////////////////////////////////////////////////////////////////////////
         mImageView = findViewById(R.id.image_view);
 
+	////////////////////////////////////////////////////////////////////////
+	// information area on the right
+	////////////////////////////////////////////////////////////////////////
+        imgFull = findViewById(R.id.imgFull);
+	imgFull.setVisibility(View.VISIBLE);
+        imgFull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+	//	startActivity(new Intent(this, FullScreenActivity.class));
+                gotoFullScreen();
+            }
+        });
+
+
+	////////////////////////////////////////////////////////////////////////
+	// control area on the left
+	////////////////////////////////////////////////////////////////////////
         mToggleScan = findViewById(R.id.toogle_scan);
         mToggleScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -547,6 +570,13 @@ public class ScanActivity extends AppCompatActivity
         } else {
             mFit.setText(R.string.fit_width);
         }
+    }
+
+    private void gotoFullScreen(){
+
+        //Intent intent = new Intent(this, PatientActivity.class);
+        //startActivity(intent);
+        startActivity(new Intent(this, FullScreenActivity.class));
     }
 
     @Override

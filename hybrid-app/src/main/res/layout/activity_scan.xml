@@ -103,11 +103,12 @@
                                 android:id="@+id/seekBarGain"
                                 style="@style/Widget.AppCompat.SeekBar.Discrete"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50dp"
                                 android:max="100"
                                 android:progress="50" />
 
                             <TextView
+                                android:id="@+id/txvPersistence"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Persistence" />
@@ -121,6 +122,7 @@
                                 android:progress="2" />
 
                             <TextView
+                                android:id="@+id/txvEnhancement"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Enhancement" />
@@ -146,6 +148,7 @@
                                 android:layout_marginBottom="20dp" />
 
                             <TextView
+                                android:id="@+id/txvColorSensitivity"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Color Sensitivity" />

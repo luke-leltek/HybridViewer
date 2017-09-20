@@ -60,6 +60,9 @@ public class ScanActivity extends AppCompatActivity
     private TextView txvCinebufcnt;
     private TextView txvGray;
     private TextView txvDr;
+    private TextView txvPersistence;
+    private TextView txvEnhancement;
+    private TextView txvColorSensitivity;
     private TextView txvTgc1;
     private TextView txvTgc2;
     private TextView txvTgc3;
@@ -149,7 +152,10 @@ public class ScanActivity extends AppCompatActivity
         });
 
 
+        txvPersistence = findViewById(R.id.txvPersistence);
+	txvPersistence.setVisibility(View.GONE);
         mSeekBarPersistence = findViewById(R.id.seekBarPersistence);
+	mSeekBarPersistence.setVisibility(View.GONE);
         //mSeekBarPersistence.setProgress(probe.getPersistence());
         //mSeekBarPersistence.setProgress(2);
                 probe.setPersistence(2);
@@ -171,7 +177,10 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
+        txvEnhancement = findViewById(R.id.txvEnhancement);
+	txvEnhancement.setVisibility(View.GONE);
         mSeekBarEnhancement = findViewById(R.id.seekBarEnhancement);
+	mSeekBarEnhancement.setVisibility(View.GONE);
         //mSeekBarEnhancement.setProgress(probe.getEnhanceLevel());
                 probe.setEnhanceLevel(2);
         mSeekBarEnhancement.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -214,7 +223,10 @@ public class ScanActivity extends AppCompatActivity
             }
         });
 
+        txvColorSensitivity = findViewById(R.id.txvColorSensitivity);
+	txvColorSensitivity.setVisibility(View.GONE);
         mSeekBarColorSensitivity = findViewById(R.id.seekBarColorSensitivity);
+	mSeekBarColorSensitivity.setVisibility(View.GONE);
         mSeekBarColorSensitivity.setProgress(probe.getColorSensitivity().getIntValue());
         mSeekBarColorSensitivity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -267,7 +279,8 @@ public class ScanActivity extends AppCompatActivity
 	// . default GONE for the advanced setting
 	////////////////////////////////////////////////////////////////////////
         txvAdv = findViewById(R.id.txvAdv);
-	txvAdv.setVisibility(View.VISIBLE);
+	//txvAdv.setVisibility(View.VISIBLE);
+	txvAdv.setVisibility(View.GONE);
         txvAdv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
